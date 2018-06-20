@@ -10,11 +10,20 @@ import scipy.io
 import numpy as np
 
 def convert_data():
+    data = scipy.io.loadmat("autism_diag_train.mat")
+    for i in data:
+     if'__'not in i and 'readme' not in i:
+        np.savetxt(("autism_diag_train"+".csv"),data[i],delimiter=',')
+    
+    data = scipy.io.loadmat("autism_diag_devel.mat")
+    for i in data:
+     if'__'not in i and 'readme' not in i:
+        np.savetxt(("autism_diag_devel"+".csv"),data[i],delimiter=',')
+    
     data = scipy.io.loadmat("autism_diag_test.mat")
     for i in data:
      if'__'not in i and 'readme' not in i:
         np.savetxt(("autism_diag_test"+".csv"),data[i],delimiter=',')
-    
     
 
 def retrieve_data(x):
@@ -55,5 +64,5 @@ def retrieve_data(x):
 if __name__ == '__main__':
     convert_data()
     x=["autism_diag_train.mat","autism_diag_devel.mat","autism_diag_test.mat"]
-    train_data,devel_data,test_data=retrieve_data(x)
+    #train_data,devel_data,test_data=retrieve_data(x)
 
